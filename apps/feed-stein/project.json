@@ -1,0 +1,74 @@
+{
+  "root": "apps/feed-stein",
+  "sourceRoot": "apps/feed-stein/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/feed-stein",
+        "index": "apps/feed-stein/src/index.html",
+        "baseHref": "/",
+        "main": "apps/feed-stein/src/main.tsx",
+        "polyfills": "apps/feed-stein/src/polyfills.ts",
+        "tsConfig": "apps/feed-stein/tsconfig.app.json",
+        "assets": [
+          "apps/feed-stein/src/favicon.ico",
+          "apps/feed-stein/src/assets"
+        ],
+        "styles": [],
+        "scripts": [],
+        "webpackConfig": "@nrwl/react/plugins/webpack"
+      },
+      "configurations": {
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/feed-stein/src/environments/environment.ts",
+              "with": "apps/feed-stein/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/web:dev-server",
+      "options": {
+        "buildTarget": "feed-stein:build",
+        "hmr": true,
+        "proxyConfig": "apps/feed-stein/proxy.conf.json"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "feed-stein:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/feed-stein/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/feed-stein"],
+      "options": {
+        "jestConfig": "apps/feed-stein/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

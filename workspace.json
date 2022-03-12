@@ -1,0 +1,9 @@
+{
+  "version": 2,
+  "projects": {
+    "api": "apps/api",
+    "api-interfaces": "libs/api-interfaces",
+    "feed-stein": "apps/feed-stein",
+    "feed-stein-e2e": "apps/feed-stein-e2e"
+  }
+}
