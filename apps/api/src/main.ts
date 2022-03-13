@@ -1,16 +1,13 @@
-import * as express from 'express';
-import { Message } from '@feedstein/api-interfaces';
+import { getMongoDBClient } from './app/infra/db';
+import logger from './app/infra/logger';
 
-const app = express();
+async function main() {
+  try {
+    await getMongoDBClient();
+    logger.info('Conncted to databaase');
+  } catch (e) {
+    logger.error(e);
+  }
+}
 
-const greeting: Message = { message: 'Welcome to api!' };
-
-app.get('/api', (req, res) => {
-  res.send(greeting);
-});
-
-const port = process.env.port || 3333;
-const server = app.listen(port, () => {
-  console.log('Listening at http://localhost:' + port + '/api');
-});
-server.on('error', console.error);
+main();
