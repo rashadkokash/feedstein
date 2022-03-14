@@ -15,7 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@feedstein/api-interfaces": ["libs/api-interfaces/src/index.ts"]
+      "@feedstein/api-interfaces": ["libs/api-interfaces/src/index.ts"],
+      "@feedstein/utils": ["libs/utils/src/index.ts"],
+      "@feedstein/validation": ["libs/validation/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

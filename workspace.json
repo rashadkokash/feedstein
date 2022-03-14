@@ -4,6 +4,8 @@
     "api": "apps/api",
     "api-interfaces": "libs/api-interfaces",
     "feed-stein": "apps/feed-stein",
-    "feed-stein-e2e": "apps/feed-stein-e2e"
+    "feed-stein-e2e": "apps/feed-stein-e2e",
+    "utils": "libs/utils",
+    "validation": "libs/validation"
   }
 }

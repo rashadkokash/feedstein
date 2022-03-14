@@ -11,6 +11,9 @@
   "dependencies": {
     "@emotion/react": "11.8.2",
     "@emotion/styled": "11.8.1",
+    "@types/bcryptjs": "^2.4.2",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.2",
     "core-js": "^3.6.5",
     "express": "4.17.2",
     "mongodb": "^4.4.1",
@@ -18,7 +21,8 @@
     "react-dom": "17.0.2",
     "regenerator-runtime": "0.13.7",
     "tslib": "^2.0.0",
-    "winston": "^3.6.0"
+    "winston": "^3.6.0",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@emotion/babel-plugin": "11.7.2",
