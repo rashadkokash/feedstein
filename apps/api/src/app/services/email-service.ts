@@ -36,7 +36,7 @@ class CEmailService {
   }
 
   async sendActivationEmail(user: IUserSchema) {
-    const activationLink = `${FRONTEND_URL}/auth/activate?token=${user.activationToken}&user_email=${user.email}`;
+    const activationLink = `${FRONTEND_URL}/auth/activate?token=${user.activationToken}`;
     const html = await ejs.renderFile(ACTIVATION_EMAIL_TEMPLATE_PATH, {
       name: user.email,
       activationLink,

@@ -1,7 +1,8 @@
 import * as bcrypt from 'bcryptjs';
+import * as uuid from 'uuid';
 
 export function getRandomString() {
-  return Math.random().toString(16).slice(2);
+  return uuid.v4();
 }
 
 export async function hashString(rawString: string): Promise<string> {

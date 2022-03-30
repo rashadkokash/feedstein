@@ -1,6 +1,7 @@
 import { IUserSchema } from '@feedstein/api-interfaces';
 
 import EmailService from '../services/email-service';
+import logger from '../infra/logger';
 import Events, { Event, EventType } from './pub-sub';
 
 export class RegisterUserEvent extends Event<IUserSchema> {
@@ -9,8 +10,12 @@ export class RegisterUserEvent extends Event<IUserSchema> {
   }
 }
 
-function handleSendActivationEmail(event: RegisterUserEvent) {
-  EmailService.sendActivationEmail(event.payload);
+async function handleSendActivationEmail(event: RegisterUserEvent) {
+  try {
+    await EmailService.sendActivationEmail(event.payload);
+  } catch (e) {
+    logger.error(e);
+  }
 }
 
 Events.on(EventType.REGISTER, handleSendActivationEmail);

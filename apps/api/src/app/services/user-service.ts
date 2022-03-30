@@ -1,6 +1,7 @@
 import * as moment from 'moment';
 
 import {
+  ActivateEmailDTO,
   InsertUserDTO,
   IUserSchema,
   RegisterUserDTO,
@@ -10,6 +11,7 @@ import { getRandomString, hashString } from '@feedstein/utils';
 import UserRepository from '../repositories/user-repository';
 import Events, { EventType } from '../events/pub-sub';
 import { RegisterUserEvent } from '../events/auth-events';
+import { ACTIVATION_EMAIL_TTL } from '../constants';
 
 export class UserService {
   async isEmailAlreadyUsed(email: string): Promise<boolean> {
@@ -18,8 +20,10 @@ export class UserService {
   }
 
   async registerUser(data: RegisterUserDTO): Promise<IUserSchema> {
-    const activationToken = await hashString(getRandomString());
-    const activationTokenExpiresAt = moment().add(1, 'day').toDate();
+    const activationToken = getRandomString();
+    const activationTokenExpiresAt = moment()
+      .add(ACTIVATION_EMAIL_TTL, 'milliseconds')
+      .toDate();
 
     const userDTO: InsertUserDTO = {
       email: data.email,
@@ -37,6 +41,10 @@ export class UserService {
     delete user.activationToken;
     delete user.activationTokenExpiresAt;
     return user;
+  }
+
+  activateEmail(data: ActivateEmailDTO): Promise<boolean> {
+    return UserRepository.activateUserByToken(data.token);
   }
 }
 
